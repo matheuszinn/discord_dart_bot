@@ -1,2 +1,6 @@
-A sample command-line application with an entrypoint in `bin/`, library code
-in `lib/`, and example unit test in `test/`.
+## Objectives
+- [ ] Auto-Fix Twitter Links
+  - [ ] Include info about the original poster
+  - [ ] Delete original message
+  - [ ] Resend with fixed link
+  - [ ] Remove unnecessary tracking data
