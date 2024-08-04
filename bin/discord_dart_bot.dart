@@ -28,8 +28,9 @@ void main(List<String> arguments) async {
       final newContent = event.message.content.replaceAllMapped(
         twitterPattern,
         (match) {
-          parsedLinks.add('https://fixupx.com/${match.group(1)}');
-          return '~~Link ${parsedLinks.length}~~';
+          final newLink = 'https://fixupx.com/${match.group(1)}';
+          parsedLinks.add(newLink);
+          return '~~[Link ${parsedLinks.length}](${newLink.replaceFirst('fixup', '')})~~';
         },
       );
 
@@ -48,7 +49,8 @@ void main(List<String> arguments) async {
 
       for (final link in parsedLinks) {
         await event.message.channel.sendMessage(MessageBuilder(
-          content: '[Link ${parsedLinks.indexOf(link) + 1}]($link)',
+          content:
+              '[${parsedLinks.length == 1 ? '.' : 'Link ${parsedLinks.indexOf(link) + 1}'}]($link)',
         ));
       }
     }
