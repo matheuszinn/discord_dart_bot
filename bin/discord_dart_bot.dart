@@ -18,7 +18,7 @@ void main(List<String> arguments) async {
     if (event.member?.id == botUser.id) return;
 
     final twitterPattern = RegExp(
-      r'https:\/\/x.com\/([^\s?]*)(?:\?s=.*&t=[^\s]*)?',
+      r'https:\/\/(?:x|twitter).com\/([^\s?]*)(?:\?s=.*&t=[^\s]*)?',
     );
 
     if (twitterPattern.hasMatch(event.message.content)) {
