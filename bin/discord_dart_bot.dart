@@ -22,16 +22,35 @@ void main(List<String> arguments) async {
     );
 
     if (twitterPattern.hasMatch(event.message.content)) {
+      await event.message.delete();
+
+      final parsedLinks = <String>[];
       final newContent = event.message.content.replaceAllMapped(
         twitterPattern,
-        (match) => 'https://fixupx.com/${match.group(1)}',
+        (match) {
+          parsedLinks.add('https://fixupx.com/${match.group(1)}');
+          return '~~Link ${parsedLinks.length}~~';
+        },
       );
 
-      final userName = event.message.author.username;
       await event.message.channel.sendMessage(
-        MessageBuilder(content: '$newContent\n**by $userName**'),
+        MessageBuilder(embeds: [
+          EmbedBuilder(
+            author: EmbedAuthorBuilder(
+              name: event.message.author.username,
+              iconUrl: event.message.author.avatar?.url,
+            ),
+            description: newContent,
+            color: DiscordColor.parseHexString('7C6EBB'),
+          ),
+        ]),
       );
-      await event.message.delete();
+
+      for (final link in parsedLinks) {
+        await event.message.channel.sendMessage(MessageBuilder(
+          content: '[Link ${parsedLinks.indexOf(link) + 1}]($link)',
+        ));
+      }
     }
   });
 }
