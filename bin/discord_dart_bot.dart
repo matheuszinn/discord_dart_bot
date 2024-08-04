@@ -34,7 +34,7 @@ void main(List<String> arguments) async {
         },
       );
 
-      await event.message.channel.sendMessage(
+      var lastMessage = await event.message.channel.sendMessage(
         MessageBuilder(
           replyId: event.message.reference?.messageId,
           embeds: [
@@ -51,11 +51,24 @@ void main(List<String> arguments) async {
       );
 
       for (final link in parsedLinks) {
-        await event.message.channel.sendMessage(MessageBuilder(
+        lastMessage = await event.message.channel.sendMessage(MessageBuilder(
+          replyId: lastMessage.id,
           content:
               '[${parsedLinks.length == 1 ? '.' : 'Link ${parsedLinks.indexOf(link) + 1}'}]($link)',
         ));
       }
+
+      await lastMessage.react(
+        ReactionBuilder(name: ':sus', id: Snowflake(941130823514615888)),
+      );
     }
+  });
+
+  client.onMessageReactionAdd.listen((event) async {
+    if (event.member?.id == botUser.id) return;
+
+    if (event.emoji.id != Snowflake(941130823514615888)) return;
+    if (event.messageAuthorId != botUser.id) return;
+    await event.message.delete();
   });
 }
