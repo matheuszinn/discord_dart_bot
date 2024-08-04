@@ -15,15 +15,23 @@ void main(List<String> arguments) async {
   final botUser = await client.users.fetchCurrentUser();
 
   client.onMessageCreate.listen((event) async {
-    print('message: ${event.message.content}');
-    if (event.mentions.contains(botUser)) {
-      await event.message.channel.sendMessage(
-        MessageBuilder(content: 'Hi', replyId: event.message.id),
+    if (event.member?.id == botUser.id) return;
+
+    final twitterPattern = RegExp(
+      r'https:\/\/x.com\/([^\s?]*)(?:\?s=.*&t=[^\s]*)?',
+    );
+
+    if (twitterPattern.hasMatch(event.message.content)) {
+      final newContent = event.message.content.replaceAllMapped(
+        twitterPattern,
+        (match) => 'https://fixupx.com/${match.group(1)}',
       );
 
-      if (event.message.content.startsWith('ping')) {
-        await event.message.delete();
-      }
+      final userName = event.message.author.username;
+      await event.message.channel.sendMessage(
+        MessageBuilder(content: '$newContent\n**by $userName**'),
+      );
+      await event.message.delete();
     }
   });
 }

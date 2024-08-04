@@ -1,8 +1,8 @@
 ## Objectives
 
-- [ ] Auto-Fix Twitter Links
+- [x] Auto-Fix Twitter Links
   - [ ] Include info about the original poster
-  - [ ] Delete original message
-  - [ ] Resend with fixed link
-  - [ ] Remove unnecessary tracking data
+  - [x] Delete original message
+  - [x] Resend with fixed link
+  - [x] Remove unnecessary tracking data
 - [ ] Auto-Fix TikTok links
