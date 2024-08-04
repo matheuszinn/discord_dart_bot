@@ -66,9 +66,30 @@ void main(List<String> arguments) async {
 
   client.onMessageReactionAdd.listen((event) async {
     if (event.member?.id == botUser.id) return;
+    final reactedMessage = await event.message.get();
 
     if (event.emoji.id != Snowflake(941130823514615888)) return;
     if (event.messageAuthorId != botUser.id) return;
-    await event.message.delete();
+
+    var currentMessage = reactedMessage;
+    final messagesToDelete = [currentMessage];
+    while (currentMessage.reference != null) {
+      final referencedMessage =
+          (await currentMessage.reference?.message?.get())!;
+      if (referencedMessage.author.id == botUser.id) {
+        messagesToDelete.insert(0, referencedMessage);
+        if (referencedMessage.content == '') {
+          break;
+        }
+        currentMessage = referencedMessage;
+      }
+    }
+
+    if (messagesToDelete.first.embeds.first.author?.name ==
+        event.member?.user?.username) {
+      for (final message in messagesToDelete) {
+        await message.delete();
+      }
+    }
   });
 }

@@ -8,5 +8,5 @@
   - [x] Keep original references to message
   - [x] Verify if the message is simply a single link. If so, ignore description creation.
   - [x] Mobile twitter support with original link
-  - [ ] Include option to delete created messages for the author
+  - [x] Include option to delete created messages for the author
 - [ ] Auto-Fix TikTok links
