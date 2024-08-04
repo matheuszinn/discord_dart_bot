@@ -78,6 +78,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.3"
+  dotenv:
+    dependency: "direct main"
+    description:
+      name: dotenv
+      sha256: "379e64b6fc82d3df29461d349a1796ecd2c436c480d4653f3af6872eccbc90e1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.2.0"
+  eterl:
+    dependency: transitive
+    description:
+      name: eterl
+      sha256: "5c54d7c4493692b87e9af3bdafb1e4f3dd079f78e0e1fd2617d75449fcd6f1de"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   file:
     dependency: transitive
     description:
@@ -102,6 +118,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
+  http:
+    dependency: transitive
+    description:
+      name: http
+      sha256: b9c29a161230ee03d3ccf545097fccd9b87a5264228c5d348202e0f0c28f9010
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.2"
   http_multi_server:
     dependency: transitive
     description:
@@ -190,6 +214,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.2"
+  nyxx:
+    dependency: "direct main"
+    description:
+      name: nyxx
+      sha256: "589b4864f72379c66cd2953645d5a79dc6d6d468638d5dc2908c2c48a37c4c6c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.3.1"
+  oauth2:
+    dependency: transitive
+    description:
+      name: oauth2
+      sha256: c4013ef62be37744efdc0861878fd9e9285f34db1f9e331cc34100d7674feb42
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.2"
   package_config:
     dependency: transitive
     description:
@@ -222,6 +262,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  retry:
+    dependency: transitive
+    description:
+      name: retry
+      sha256: "822e118d5b3aafed083109c72d5f484c6dc66707885e07c0fbcb8b986bba7efc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.2"
+  runtime_type:
+    dependency: transitive
+    description:
+      name: runtime_type
+      sha256: "00e431718064e4512012a46e74ed94977ea4d86d83ae416e635092c50ad1397e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   shelf:
     dependency: transitive
     description:
