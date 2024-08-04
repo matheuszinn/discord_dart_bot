@@ -68,9 +68,6 @@ void main(List<String> arguments) async {
     if (event.member?.id == botUser.id) return;
     final reactedMessage = await event.message.get();
 
-    if (event.emoji.id != Snowflake(941130823514615888)) return;
-    if (event.messageAuthorId != botUser.id) return;
-
     // if (event.emoji.name == '🔍') {
     //   print(reactedMessage);
     //   print('=============[embeds]=============');
@@ -90,6 +87,9 @@ void main(List<String> arguments) async {
     //   }
     //   return;
     // }
+
+    if (event.emoji.id != Snowflake(941130823514615888)) return;
+    if (event.messageAuthorId != botUser.id) return;
 
     var currentMessage = reactedMessage;
     final messagesToDelete = [currentMessage];
