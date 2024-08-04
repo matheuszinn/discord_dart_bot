@@ -71,6 +71,26 @@ void main(List<String> arguments) async {
     if (event.emoji.id != Snowflake(941130823514615888)) return;
     if (event.messageAuthorId != botUser.id) return;
 
+    // if (event.emoji.name == '🔍') {
+    //   print(reactedMessage);
+    //   print('=============[embeds]=============');
+    //   for (final embed in reactedMessage.embeds) {
+    //     print('Author: ${embed.author}');
+    //     print('Color: ${embed.color}');
+    //     print('Description: ${embed.description}');
+    //     print('Fields: ${embed.fields}');
+    //     print('Footer: ${embed.footer}');
+    //     print('Image: ${embed.image}');
+    //     print('Provider: ${embed.provider}');
+    //     print('Thumbnail: ${embed.thumbnail}');
+    //     print('Timestamp: ${embed.timestamp}');
+    //     print('Title: ${embed.title}');
+    //     print('URL: ${embed.url}');
+    //     print('Video: ${embed.video}');
+    //   }
+    //   return;
+    // }
+
     var currentMessage = reactedMessage;
     final messagesToDelete = [currentMessage];
     while (currentMessage.reference != null) {
