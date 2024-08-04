@@ -5,7 +5,7 @@
   - [x] Delete original message
   - [x] Resend with fixed link
   - [x] Remove unnecessary tracking data
-  - [ ] Keep original references to message
+  - [x] Keep original references to message
   - [x] Verify if the message is simply a single link. If so, ignore description creation.
   - [x] Mobile twitter support with original link
   - [ ] Include option to delete created messages for the author

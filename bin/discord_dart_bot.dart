@@ -35,16 +35,19 @@ void main(List<String> arguments) async {
       );
 
       await event.message.channel.sendMessage(
-        MessageBuilder(embeds: [
-          EmbedBuilder(
-            author: EmbedAuthorBuilder(
-              name: event.message.author.username,
-              iconUrl: event.message.author.avatar?.url,
+        MessageBuilder(
+          replyId: event.message.reference?.messageId,
+          embeds: [
+            EmbedBuilder(
+              author: EmbedAuthorBuilder(
+                name: event.message.author.username,
+                iconUrl: event.message.author.avatar?.url,
+              ),
+              description: newContent,
+              color: DiscordColor.parseHexString('7C6EBB'),
             ),
-            description: newContent,
-            color: DiscordColor.parseHexString('7C6EBB'),
-          ),
-        ]),
+          ],
+        ),
       );
 
       for (final link in parsedLinks) {
