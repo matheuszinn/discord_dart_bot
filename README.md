@@ -15,4 +15,7 @@
 - [ ] Fix message embed still displaying trackers
 - [ ] Tormenta25 - Helper
   - [x] Acompanhamento básico
-  - [ ] Refatorar Código
+  - [x] Refatorar Código
+  - [ ] Deletar a mensagem prévia caso exista ao reiniciar
+  - [ ] Incluir Error Handling
+- [ ] Refatorar resto do bot
