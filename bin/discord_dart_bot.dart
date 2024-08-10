@@ -1,6 +1,8 @@
-// import 'package:discord_dart_bot/discord_dart_bot.dart' as discord_dart_bot;
+import 'dart:async';
+import 'dart:convert';
 
 import 'package:dotenv/dotenv.dart';
+import 'package:http/http.dart';
 import 'package:nyxx/nyxx.dart';
 
 void main(List<String> arguments) async {
@@ -13,6 +15,65 @@ void main(List<String> arguments) async {
   );
 
   final botUser = await client.users.fetchCurrentUser();
+
+  final endpoint = Uri.parse(
+    'https://api.catarse.me/project_details?project_id=eq.178796',
+  );
+  final response = await get(endpoint);
+  final [{'pledged': pledged}] = jsonDecode(response.body) as List;
+  const targets = {
+    790000: '+5 Distinções de Heróis (25)',
+    925000: 'Novas Ameaças: Gênios',
+    1115000: 'Mundos dos Deuses em Cartelas (4)',
+    1150000: 'Tokens das Novas Ameaças',
+    1205000: 'Mais Poderes de Classes 1/2',
+    1260000: '+5 Distinções de Devotos (15)',
+    1350000: '+4 Cartelas de Mundos (8)',
+    1375000: 'Trilhas Sonoras Artonianas',
+    1415000: '+5 Distinções de Heróis (30)',
+    1455000: 'Novas Ameaças: Fadas',
+    1495000: '+4 Cartelas de Mundos (12)',
+    1530000: 'Anúncio Surpresa + Brinde Digital',
+    1560000: 'Culinária Avançada',
+    1595000: '+5 Distinções de Devotos (20)',
+    1635000: '+4 Cartelas de Mundos (16)',
+    1725000: 'Guia de Deuses Menores (Digital)',
+    1760000: 'Mais Poderes de Classes 2/2',
+    1795000: 'Nova Linhagem de Feiticeiro: Abençoado',
+    1815000: 'Cartelas Digitais',
+    1855000: '+5 Distinções de Heróis (35)',
+    1900000: 'Novas Ameaças: Gigantes',
+    1990000: '+4 Cartelas de Mundos (20)',
+    2326485: 'Guia de Deuses Menores (Físico)',
+  };
+
+  final successTargets =
+      targets.entries.where((t) => t.key <= pledged).map((t) => t.value);
+  var nextTarget = successTargets.length;
+
+  final catarseMessage =
+      'Iniciando acompanhamento da Campanha :dragon_face:\n${successTargets.map((t) => ':white_check_mark: $t').join('\n')}';
+  const rpgChannel = Snowflake(1026722770333204511);
+  client.channels.fetch(rpgChannel).then((channel) => (channel as TextChannel)
+      .sendMessage(MessageBuilder(content: catarseMessage)));
+
+  Timer.periodic(const Duration(seconds: 15), (_) async {
+    print('Tá rodando a parte q é de tempos em tempos');
+    final nextEntry = targets.entries.elementAt(nextTarget);
+    final response = await get(endpoint);
+    final [{'pledged': pledged}] = jsonDecode(response.body) as List;
+    if (pledged >= nextEntry.key) {
+      nextTarget++;
+      client.channels.fetch(rpgChannel).then(
+            (channel) => (channel as TextChannel).sendMessage(
+              MessageBuilder(
+                content:
+                    'Nova meta alcançada! :tada:\n:white_check_mark: ${nextEntry.value}',
+              ),
+            ),
+          );
+    }
+  });
 
   client.onMessageCreate.listen((event) async {
     if (event.member?.id == botUser.id) return;
