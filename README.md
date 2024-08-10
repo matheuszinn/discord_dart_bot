@@ -13,3 +13,6 @@
 - [ ] Reduce embed clutter
   - [ ] Verify if it's possible to include the author message as a new embed after sending the auto-embed message
 - [ ] Fix message embed still displaying trackers
+- [ ] Tormenta25 - Helper
+  - [x] Acompanhamento básico
+  - [ ] Refatorar Código
